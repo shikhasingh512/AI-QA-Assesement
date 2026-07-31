@@ -1,0 +1,22 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://uat.projects.audioenhancement.com",
+      "localStorage": [
+        {
+          "name": "ld:$anonUserId",
+          "value": "project-portal"
+        },
+        {
+          "name": "ld:64a6759412740812d67ebb2d:eyJhbm9ueW1vdXMiOnRydWUsImtpbmQiOiJ1c2VyIiwia2V5IjoicHJvamVjdC1wb3J0YWwifQ==",
+          "value": "{\"azureSso\":{\"version\":1910,\"flagVersion\":28,\"value\":true,\"variation\":0,\"trackEvents\":false},\"changeOrder\":{\"version\":1910,\"flagVersion\":19,\"value\":false,\"variation\":1,\"trackEvents\":false},\"opportunityNumber\":{\"version\":1910,\"flagVersion\":528,\"value\":false,\"variation\":1,\"trackEvents\":false},\"optOutConfigProducts\":{\"version\":1910,\"flagVersion\":503,\"value\":true,\"variation\":0,\"trackEvents\":false},\"UserSpecific\":{\"version\":1910,\"flagVersion\":2,\"value\":false,\"variation\":1,\"trackEvents\":false},\"tieredInstall\":{\"version\":1910,\"flagVersion\":160,\"value\":true,\"variation\":0,\"trackEvents\":false},\"enableLogs\":{\"version\":1910,\"flagVersion\":4,\"value\":true,\"variation\":0,\"trackEvents\":false},\"fitToMap\":{\"version\":1910,\"flagVersion\":27,\"value\":true,\"variation\":0,\"trackEvents\":false},\"installationPacket\":{\"version\":1910,\"flagVersion\":492,\"value\":false,\"variation\":1,\"trackEvents\":false},\"$schema\":1}"
+        },
+        {
+          "name": "ld:64a6759412740812d67ebb2d:$diagnostics",
+          "value": "{\"dataSinceDate\":1725284024071,\"droppedEvents\":0,\"eventsInLastBatch\":0,\"streamInits\":[]}"
+        }
+      ]
+    }
+  ]
+}

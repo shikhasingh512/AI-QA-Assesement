@@ -1,0 +1,35 @@
+{
+  "name": "playwright_generic_framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "_comment": "add below commands in your pipeline to execute test cases and append result in xray for each test case",
+    "test:regression": "npx playwright test --project=testcases_regression --grep @regression --workers=2",
+    "post:xray:xml": "node utils/xrayConvert.js",
+    "post:test:xray": "npm run post:xray:xml && node utils/xrayConfig.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.6.2"
+  },
+  "dependencies": {
+    "@playwright/browser-chromium": "^1.40.0",
+    "allure-playwright": "^2.4.0",
+    "axios": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.46.0",
+    "faker": "^5.5.3",
+    "fs": "^0.0.1-security",
+    "Logger": "^0.0.0",
+    "mysql": "^2.18.1",
+    "winston": "^3.14.2",
+    "path": "^0.12.7",
+    "pdf-parse": "^1.1.1",
+    "xml2js": "^0.6.2"
+  }
+}

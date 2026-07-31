@@ -1,0 +1,15 @@
+{
+    "systemdata":{
+    "systemname":"Test Headend System Generic",
+    "systemtype":"Headend",
+    "ranking":"1",
+    "systemdescription":"Test Headend System for playwright generic framework",
+    "keyfeatures":"automation testing",
+    "coresystemcomponentscount":"1",
+    "coresystemcomponents":"Grandstream GXP2130 Enterprise Phone",
+    "includedsystemaccessoriescount":"1",
+    "includedsystemaccessories":"Choose an option",
+    "solutioncompatibility":"EPIC Paging System,Classroom Video,School Safety,Classroom Audio,InfoView",
+    "addonscount":"0"
+    }
+}

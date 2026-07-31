@@ -1,0 +1,162 @@
+// pipeline {
+    
+//     agent any
+
+//     parameters {
+//         string(
+//             name: 'PATH_TO_PLAYWRIGHT',
+//             defaultValue: 'e2e/PRE-EPIC-Playwright',
+//             description: 'Path to the playwright project'
+//         )
+
+//          choice(
+//             choices: 'UAT\nQA',
+//             description: 'Environment you want to run tests for',
+//             name: 'ENVIRONMENT'
+//         )
+//     }
+
+//     environment {
+//         S3_BUCKET_NAME = 'ui-automation-test-artifacts'
+//         REPO_URL = 'git@bitbucket.org:audioenhancement/pre-epic-portal.git'
+//     }
+    
+//     stages {
+        
+//         stage('Fetch Code'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     echo 'Cloning Automation Scripts From Bitbucket'
+//                     git branch: 'automation_uat', credentialsId: 'bitbucket', url: "${env.REPO_URL}"
+//                 }
+//             }
+//         }
+
+//         stage('Print Tools Information'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     sh '''
+//                     set +x
+                    
+//                     export PATH=$PATH:/var/lib/jenkins/.config/node-v14.17.5/bin
+                    
+//                     NODE_VERSION=$(node --version)
+//                     NPM_VERSION=$(npm --version)
+
+//                     echo NodeJS Version: $NODE_VERSION
+//                     echo NPM Version: $NPM_VERSION
+                    
+//                     '''
+//                 }
+//             }
+//         }
+
+//         stage('Environment Setup'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     sh '''
+//                     #!/bin/bash
+//                     set +x
+                    
+//                     export PATH=$PATH:/var/lib/jenkins/.config/node-v14.17.5/bin
+                    
+//                     echo "Changing directory to $PATH_TO_PLAYWRIGHT"
+//                     cd $PATH_TO_PLAYWRIGHT
+//                     if [ $ENVIRONMENT = "UAT" ];
+//                     then
+//                         echo I will run for UAT
+//                         aws s3 cp s3://${S3_BUCKET_NAME}/config/uat/env_uat . && mv env_uat .env
+//                         ls .env
+//                     elif [ $ENVIRONMENT = "QA" ];
+//                     then
+//                         echo I will run for QA
+//                         aws s3 cp s3://${S3_BUCKET_NAME}/config/qa/env_qa . && mv env_qa .env
+//                         ls .env
+//                     fi
+//                     #cat .env
+//                     '''
+//                 }
+//             }
+//         }
+
+//         stage('Install Playwright Dependencies And List Tests'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     sh '''
+//                     #!/bin/bash
+//                     set +x
+                    
+//                     export PATH=$PATH:/var/lib/jenkins/.config/node-v14.17.5/bin
+//                     cd $PATH_TO_PLAYWRIGHT
+//                     npm install
+//                     npm install -D @playwright/test
+//                     npx playwright test --list
+//                     '''
+//                 }
+//             }
+//         }
+
+//         stage('Run Playwright Tests'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+//                         sh '''
+//                         #!/bin/bash
+//                         set +x
+                        
+//                         export PATH=$PATH:/var/lib/jenkins/.config/node-v14.17.5/bin
+//                         cd $PATH_TO_PLAYWRIGHT
+//                         npx playwright test
+//                         '''
+//                     }
+//                 }
+//             }
+//         }
+
+//         stage('Upload Artifacts to S3'){
+//             steps {
+//                 dir ("${WORKSPACE}/${BUILD_ID}") {
+//                     sh '''
+//                     #!/bin/bash
+//                     set +x
+//                     export PATH=$PATH:/var/lib/jenkins/.config/node-v14.17.5/bin
+//                     DATESTAMP=$(date '+%Y-%m-%d')
+//                     TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+                    
+//                     echo "Changing Directory To Playwright Project"
+//                     cd $PATH_TO_PLAYWRIGHT
+//                     pwd
+
+//                     echo "Zipping test results and playwright reports"
+//                     zip -r automation-results-$TIMESTAMP.zip test-results playwright-report
+                    
+//                     echo "Uploading to S3 bucket"
+//                     aws s3 cp automation-results-$TIMESTAMP.zip s3://${S3_BUCKET_NAME}/results-$DATESTAMP/
+//                     '''
+//                 }
+//             }
+//         }
+//     }
+    
+//     post {
+//         always {
+//             echo "I will always execute this!"
+//             sh '''
+//             #!/bin/bash
+//             set +x
+                    
+//             echo "Changing Directory To Playwright Project"
+//             cd $PATH_TO_PLAYWRIGHT
+            
+//             echo "Removing the zip files"
+//             rm -rf testresults-$TIMESTAMP.zip
+//             rm -rf playwright-report-$TIMESTAMP.zip
+            
+//             echo "Removing test results and playwright report folders"
+//             rm -rf test-results playwright-report
+//             ls -lrth
+//             '''
+//             cleanWs()
+//         }
+//     }
+// }

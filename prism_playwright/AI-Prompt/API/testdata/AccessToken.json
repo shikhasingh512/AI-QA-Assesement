@@ -1,0 +1,7 @@
+{
+  "code": 200,
+  "success": true,
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIyMSwiaWF0IjoxNzAxNTA1ODU2fQ.Ey4TwGDqlZGV8QgqYhJkUAOfftO6uicGRGBOIavhTUE"
+  }
+}

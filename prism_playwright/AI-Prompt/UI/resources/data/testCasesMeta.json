@@ -1,0 +1,17 @@
+{
+    "login": [
+      "__comment: add all your test cases id related to login here and use this keyword in your test case",
+      "PA-12133",
+      "PA-12134", 
+      "PA-12136" 
+    ],
+    "create_system": [
+      "PA-12137"
+    ],
+    "creation_district":[
+     "PA-12138"
+    ],
+    "pdf_verification":[
+      "PA-12139"  
+    ]
+  }

@@ -1,0 +1,7 @@
+{
+    "_comment":"this json file serve as input data for login related test cases",
+    "adminlogin":{
+        "username":"jhonlee@mailinator.com",
+        "password":"Welcome@1"
+    }
+}
